@@ -34,6 +34,7 @@ else
   fi
 fi
 
+if [ "$BUILD_IOS" != "1" ]; then
 # Set NDK
 export API=21
 export NDK=`pwd`/android-ndk-$NDK_VERSION
@@ -54,4 +55,4 @@ export LD=$TOOLCHAIN/bin/$TARGET-ld
 export OBJCOPY=$TOOLCHAIN/bin/$TARGET-objcopy
 export RANLIB=$TOOLCHAIN/bin/$TARGET-ranlib
 export STRIP=$TOOLCHAIN/bin/$TARGET-strip
-
+fi

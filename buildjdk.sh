@@ -73,12 +73,7 @@ if [ "$error_code" -ne 0 ]; then
   exit $error_code
 fi
 
-if [ "$BUILD_IOS" == "1" ]; then
-  ln -s build/macosx-${TARGET_JDK}-normal-${JVM_VARIANTS}-${JDK_DEBUG_LEVEL} build/linux-${TARGET_JDK}-normal-${JVM_VARIANTS}-${JDK_DEBUG_LEVEL}
-fi
-
-# mkdir -p build/linux-${TARGET_JDK}-normal-${JVM_VARIANTS}-${JDK_DEBUG_LEVEL}
-cd build/linux-${TARGET_JDK}-normal-${JVM_VARIANTS}-${JDK_DEBUG_LEVEL}
+cd build/${JVM_PLATFORM}-${TARGET_JDK}-normal-${JVM_VARIANTS}-${JDK_DEBUG_LEVEL}
 make JOBS=4 images || \
 error_code=$?
 if [ "$error_code" -ne 0 ]; then

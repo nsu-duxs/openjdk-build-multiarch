@@ -40,12 +40,12 @@ if [ "$BUILD_IOS" != "1" ]; then
   ar cru dummy_libs/libthread_db.a
 else
   platform_args=--with-toolchain-type=clang
+  export CC="$PWD/clang-ios-ignore-ld-errors"
+  chmod +x $CC
 fi
 
 cd openjdk
 rm -rf build
-
-export CC="`realpath ..`/clang-ios-ignore-ld-errors"
 
 #	--with-extra-cxxflags="$CXXFLAGS -Dchar16_t=uint16_t -Dchar32_t=uint32_t" \
 #	--with-extra-cflags="$CPPFLAGS" \

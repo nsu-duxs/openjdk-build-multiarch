@@ -15,7 +15,7 @@ export FREETYPE_DIR=`pwd`/freetype-$BUILD_FREETYPE_VERSION/build_android-${TARGE
 export CUPS_DIR=`pwd`/cups-2.2.4
 
 export CFLAGS+=" -DDONT_COMPILE_SHENANDOAH -DLE_STANDALONE" # -I$FREETYPE_DIR -I$CUPS_DIR
-export LDFLAGS+=" -L`pwd`/dummy_libs -Wl,--warn-unresolved-symbols"
+export LDFLAGS+=" -L`pwd`/dummy_libs"
 
 # if [ "$TARGET_JDK" == "aarch32" ] || [ "$TARGET_JDK" == "aarch64" ]
 # then
@@ -42,10 +42,6 @@ else
   platform_args=--with-toolchain-type=clang
   export CFLAGS+=" -arch arm64 -miphoneos-version-min=12.0 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk"
   export LDFLAGS+=" -arch arm64 -miphoneos-version-min=12.0 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk"
-  export CC="$PWD/clang-ios-ignore-ld-errors"
-  export CXX="$PWD/clang++-ios-ignore-ld-errors"
-  chmod +x $CC
-  chmod +x $CXX
 fi
 
 cd openjdk
@@ -78,7 +74,7 @@ if [ "$error_code" -ne 0 ]; then
 fi
 
 if [ "$BUILD_IOS" == "1" ]; then
-  ln -s macosx-${TARGET_JDK}-normal-${JVM_VARIANTS}-${JDK_DEBUG_LEVEL} linux-${TARGET_JDK}-normal-${JVM_VARIANTS}-${JDK_DEBUG_LEVEL}
+  ln -s build/macosx-${TARGET_JDK}-normal-${JVM_VARIANTS}-${JDK_DEBUG_LEVEL} build/linux-${TARGET_JDK}-normal-${JVM_VARIANTS}-${JDK_DEBUG_LEVEL}
 fi
 
 # mkdir -p build/linux-${TARGET_JDK}-normal-${JVM_VARIANTS}-${JDK_DEBUG_LEVEL}

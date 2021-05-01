@@ -34,7 +34,11 @@ else
   fi
 fi
 
-if [ "$BUILD_IOS" != "1" ]; then
+if [ "$BUILD_IOS" == "1" ]; then
+  export JVM_PLATFORM=macosx
+else
+
+export JVM_PLATFORM=linux
 # Set NDK
 export API=21
 export NDK=`pwd`/android-ndk-$NDK_VERSION

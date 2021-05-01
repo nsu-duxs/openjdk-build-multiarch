@@ -45,6 +45,8 @@ fi
 cd openjdk
 rm -rf build
 
+export CC="`realpath ..`/clang-ios-ignore-ld-errors"
+
 #	--with-extra-cxxflags="$CXXFLAGS -Dchar16_t=uint16_t -Dchar32_t=uint32_t" \
 #	--with-extra-cflags="$CPPFLAGS" \
 bash ./configure \

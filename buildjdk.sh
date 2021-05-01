@@ -38,6 +38,8 @@ if [ "$BUILD_IOS" != "1" ]; then
   mkdir -p dummy_libs
   ar cru dummy_libs/libpthread.a
   ar cru dummy_libs/libthread_db.a
+else
+  platform_args=--with-toolchain-type=clang
 fi
 
 cd openjdk
@@ -60,7 +62,8 @@ bash ./configure \
 	--with-freetype-lib=$FREETYPE_DIR/lib \
 	--with-freetype-include=$FREETYPE_DIR/include/freetype2 \
 	--x-includes=$ANDROID_INCLUDE \
-	--x-libraries=/usr/lib || \
+	--x-libraries=/usr/lib \
+        $platform_args || \
 error_code=$?
 if [ "$error_code" -ne 0 ]; then
   echo "\n\nCONFIGURE ERROR $error_code , config.log:"

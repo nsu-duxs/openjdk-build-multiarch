@@ -43,6 +43,7 @@ else
   export CC="$PWD/clang-ios-ignore-ld-errors"
   export CXX="$PWD/clang++-ios-ignore-ld-errors"
   chmod +x $CC
+  chmod +x $CXX
 fi
 
 cd openjdk

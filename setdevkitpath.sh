@@ -22,13 +22,13 @@ fi
 if [ "$TARGET_JDK" == "aarch32" ] || [ "$TARGET_JDK" == "arm" ]
 then
   echo "VM variant: client"
-  if [ -z "$JVM_VARIANTS"]
+  if [ -z "$JVM_VARIANTS" ]
   then
     export JVM_VARIANTS=client
   fi
 else
   echo "VM variant: server"
-  if [ -z "$JVM_VARIANTS"]
+  if [ -z "$JVM_VARIANTS" ]
   then
     export JVM_VARIANTS=server
   fi

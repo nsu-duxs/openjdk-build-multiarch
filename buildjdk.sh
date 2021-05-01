@@ -41,6 +41,7 @@ if [ "$BUILD_IOS" != "1" ]; then
 else
   platform_args=--with-toolchain-type=clang
   export CC="$PWD/clang-ios-ignore-ld-errors"
+  export CXX="$PWD/clang++-ios-ignore-ld-errors"
   chmod +x $CC
 fi
 

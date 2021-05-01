@@ -33,12 +33,13 @@ if [ "$BUILD_IOS" != "1" ]; then
   ln -s -f /usr/include/fontconfig $ANDROID_INCLUDE/
 
   sudo apt -y install systemtap-sdt-dev gcc-multilib g++-multilib libxtst-dev libasound2-dev libelf-dev libfontconfig1-dev libx11-dev
-fi
 
 # Create dummy libraries so we won't have to remove them in OpenJDK makefiles
 mkdir -p dummy_libs
 ar cru dummy_libs/libpthread.a
 ar cru dummy_libs/libthread_db.a
+
+fi
 
 cd openjdk
 rm -rf build

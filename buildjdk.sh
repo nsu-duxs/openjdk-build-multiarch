@@ -39,7 +39,7 @@ if [ "$BUILD_IOS" != "1" ]; then
   ar cru dummy_libs/libpthread.a
   ar cru dummy_libs/libthread_db.a
 else
-  platform_args=--with-toolchain-type=clang
+  platform_args="--with-sys-root=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk --with-tools-dir=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin"
 fi
 
 cd openjdk

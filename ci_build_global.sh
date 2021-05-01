@@ -17,8 +17,8 @@ fi
 
 # Some modifies to NDK to fix
 
-./clonejdk.sh
 ./buildlibs.sh
+./clonejdk.sh
 ./buildjdk.sh
 ./removejdkdebuginfo.sh
 ./tarjdk.sh

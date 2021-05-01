@@ -11,12 +11,9 @@ else
   export TARGET_PHYS=$TARGET
 fi
 
-sudo apt -y install systemtap-sdt-dev gcc-multilib g++-multilib libxtst-dev libasound2-dev libelf-dev libfontconfig1-dev libx11-dev
-
 export FREETYPE_DIR=`pwd`/freetype-$BUILD_FREETYPE_VERSION/build_android-${TARGET_SHORT}
 export CUPS_DIR=`pwd`/cups-2.2.4
 
-# simplest to force headless:)
 export CFLAGS+=" -DDONT_COMPILE_SHENANDOAH -DLE_STANDALONE" # -I$FREETYPE_DIR -I$CUPS_DIR
 export LDFLAGS+=" -L`pwd`/dummy_libs -Wl,--warn-unresolved-symbols"
 
@@ -31,8 +28,12 @@ export LDFLAGS+=" -L`pwd`/dummy_libs -Wl,--warn-unresolved-symbols"
 # cp -R /usr/include/X11 $ANDROID_INCLUDE/
 # cp -R /usr/include/fontconfig $ANDROID_INCLUDE/
 
-ln -s -f /usr/include/X11 $ANDROID_INCLUDE/
-ln -s -f /usr/include/fontconfig $ANDROID_INCLUDE/
+if [ "$BUILD_IOS" != "1" ]; then
+  ln -s -f /usr/include/X11 $ANDROID_INCLUDE/
+  ln -s -f /usr/include/fontconfig $ANDROID_INCLUDE/
+
+  sudo apt -y install systemtap-sdt-dev gcc-multilib g++-multilib libxtst-dev libasound2-dev libelf-dev libfontconfig1-dev libx11-dev
+fi
 
 # Create dummy libraries so we won't have to remove them in OpenJDK makefiles
 mkdir -p dummy_libs

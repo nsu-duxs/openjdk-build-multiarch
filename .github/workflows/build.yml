@@ -55,6 +55,7 @@ jobs:
 
     - name: Build with CI build script
       run: |
+        export arch=aarch64
         export BUILD_IOS=1
         bash "ci_build_arch_${{matrix.arch}}.sh"
 

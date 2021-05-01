@@ -1,10 +1,4 @@
 #!/bin/bash
 set -e
 
-if [ "$4" == "-Wl,--warn-unresolved-symbols" ]; then
-  clang $1 $2 $3 $5
-else
-  clang $@
-fi
-
-# clang -DDONT_COMPILE_SHENANDOAH -DLE_STANDALONE   -L/Users/runner/work/android-openjdk-build-multiarch/android-openjdk-build-multiarch/dummy_libs -Wl,—warn-unresolved-symbols conftest.c
+clang ${@/"-Wl,--warn-unresolved-symbols"/""}

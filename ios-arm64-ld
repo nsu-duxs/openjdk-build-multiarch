@@ -1,3 +1,2 @@
 set -e
->&2 echo "COMMAND: ld $@"
 $(xcrun -find -sdk iphoneos ld) -arch arm64 $@

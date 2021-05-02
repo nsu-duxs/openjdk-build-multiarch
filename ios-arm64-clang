@@ -1,2 +1,3 @@
 set -e
-$(xcrun -find -sdk iphoneos clang) -arch arm64 $@
+$(xcrun -find -sdk iphoneos clang) -arch arm64 ${@/"-Wl,-arch x86_64"/""}
+#$@

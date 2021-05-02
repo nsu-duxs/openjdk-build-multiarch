@@ -43,6 +43,8 @@ else
   # bothflags=" -arch arm64 -miphoneos-version-min=12.0"
   # -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk
   export SDKROOT=$(xcrun --sdk iphoneos --show-sdk-path)
+  export CFLAGS+=" -arch arm64 -miphoneos-version-min=12.0"
+  export LDFLAGS+=" -arch arm64 -miphoneos-version-min=12.0"
 fi
 
 cd openjdk

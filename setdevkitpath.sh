@@ -39,6 +39,7 @@ if [ "$BUILD_IOS" == "1" ]; then
 
   export CC=$PWD/ios-arm64-clang
   export CXX=$PWD/ios-arm64-clang++
+  export LD=$PWD/ios-arm64-ld
 else
 
 export JVM_PLATFORM=linux

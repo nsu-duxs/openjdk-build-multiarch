@@ -37,8 +37,8 @@ fi
 if [ "$BUILD_IOS" == "1" ]; then
   export JVM_PLATFORM=macosx
 
-  export CC=`realpath .`/ios-arm64-clang
-  export CC=`realpath .`/ios-arm64-clang++
+  export CC=$PWD/ios-arm64-clang
+  export CXX=$PWD/ios-arm64-clang++
 else
 
 export JVM_PLATFORM=linux

@@ -40,9 +40,9 @@ if [ "$BUILD_IOS" != "1" ]; then
   ar cru dummy_libs/libthread_db.a
 else
   platform_args=--with-toolchain-type=clang
-  export CFLAGS+=" -arch arm64 -miphoneos-version-min=12.0"
-  export LDFLAGS+=" -arch arm64 -miphoneos-version-min=12.0"
-  # -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk
+  bothflags=" -arch arm64 -miphoneos-version-min=12.0 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk"
+  export CFLAGS+=$bothflags
+  export LDFLAGS+=$bothflags
 fi
 
 cd openjdk

@@ -42,32 +42,30 @@ else
   platform_args=--with-toolchain-type=clang
   # bothflags=" -arch arm64 -miphoneos-version-min=12.0"
   # -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk
-  export CC+=" -arch arm64"
-  export CXX+=" -arch arm64"
   export SDKROOT=$(xcrun --sdk iphoneos --show-sdk-path)
 fi
 
 cd openjdk
 rm -rf build
 
-#	--with-extra-cxxflags="$CXXFLAGS -Dchar16_t=uint16_t -Dchar32_t=uint32_t" \
-#	--with-extra-cflags="$CPPFLAGS" \
+#   --with-extra-cxxflags="$CXXFLAGS -Dchar16_t=uint16_t -Dchar32_t=uint32_t" \
+#   --with-extra-cflags="$CPPFLAGS" \
 bash ./configure \
-	--with-extra-cflags="$CFLAGS" \
-	--with-extra-cxxflags="$CFLAGS" \
-	--with-extra-ldflags="$LDFLAGS" \
-	--enable-option-checking=fatal \
-	--openjdk-target=$TARGET_PHYS \
-	--with-jdk-variant=normal \
-        --with-jvm-variants=$JVM_VARIANTS \
-	--with-cups-include=$CUPS_DIR \
-	--with-devkit=$TOOLCHAIN \
-	--with-debug-level=$JDK_DEBUG_LEVEL \
-	--with-fontconfig-include=$ANDROID_INCLUDE \
-	--with-freetype-lib=$FREETYPE_DIR/lib \
-	--with-freetype-include=$FREETYPE_DIR/include/freetype2 \
-	--x-includes=$ANDROID_INCLUDE \
-	--x-libraries=/usr/lib \
+    --with-extra-cflags="$CFLAGS" \
+    --with-extra-cxxflags="$CFLAGS" \
+    --with-extra-ldflags="$LDFLAGS" \
+    --enable-option-checking=fatal \
+    --openjdk-target=$TARGET_PHYS \
+    --with-jdk-variant=normal \
+    --with-jvm-variants=$JVM_VARIANTS \
+    --with-cups-include=$CUPS_DIR \
+    --with-devkit=$TOOLCHAIN \
+    --with-debug-level=$JDK_DEBUG_LEVEL \
+    --with-fontconfig-include=$ANDROID_INCLUDE \
+    --with-freetype-lib=$FREETYPE_DIR/lib \
+    --with-freetype-include=$FREETYPE_DIR/include/freetype2 \
+    --x-includes=$ANDROID_INCLUDE \
+    --x-libraries=/usr/lib \
         $platform_args || \
 error_code=$?
 if [ "$error_code" -ne 0 ]; then

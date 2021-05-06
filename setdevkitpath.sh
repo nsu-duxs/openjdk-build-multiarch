@@ -37,9 +37,14 @@ fi
 if [ "$BUILD_IOS" == "1" ]; then
   export JVM_PLATFORM=macosx
 
+  export thecc=$(xcrun -find -sdk iphoneos clang)
+  export thecxx=$(xcrun -find -sdk iphoneos clang++)
+  export thesysroot=$(xcrun --sdk iphoneos --show-sdk-path)
+
   export CC=$PWD/ios-arm64-clang
   export CXX=$PWD/ios-arm64-clang++
-  export LD=$PWD/ios-arm64-ld
+  #$(xcrun -find -sdk iphoneos clang++)
+  export LD=eyeswtf #$(xcrun -find -sdk iphoneos ld)
 else
 
 export JVM_PLATFORM=linux

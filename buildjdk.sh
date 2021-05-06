@@ -11,9 +11,8 @@ else
   export TARGET_PHYS=$TARGET
 fi
 
-export FREETYPE_DIR=`pwd`/freetype-$BUILD_FREETYPE_VERSION/build_android-${TARGET_SHORT}
+export FREETYPE_DIR=`pwd`/freetype-$BUILD_FREETYPE_VERSION/build_android-$TARGET_SHORT
 export CUPS_DIR=`pwd`/cups-2.2.4
-
 export CFLAGS+=" -DDONT_COMPILE_SHENANDOAH -DLE_STANDALONE" # -I$FREETYPE_DIR -I$CUPS_DIR
 export LDFLAGS+=" -L`pwd`/dummy_libs"
 
@@ -42,22 +41,29 @@ else
   platform_args=--with-toolchain-type=clang
   # bothflags=" -arch arm64 -miphoneos-version-min=12.0"
   # -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk
-  export SDKROOT=$(xcrun --sdk iphoneos --show-sdk-path)
-  export CFLAGS+=" -arch arm64 -miphoneos-version-min=12.0"
-  export LDFLAGS+=" -arch arm64 -miphoneos-version-min=12.0"
+  #export SDKROOT=$(xcrun --sdk iphoneos --show-sdk-path)
+  #export CFLAGS+=" -arch arm64 -miphoneos-version-min=12.0 -isysroot $(xcrun --sdk iphoneos --show-sdk-path) -v"
+
+  #export LDFLAGS+=" -arch arm64 -miphoneos-version-min=12.0 -isysroot $(xcrun --sdk iphoneos --show-sdk-path) -v"
+
+  export CHOST="aarch64-apple-darwin"
 fi
 
 cd openjdk
-rm -rf build
+#rm -rf build
 
+ #   --openjdk-target=$TARGET_PHYS \
 #   --with-extra-cxxflags="$CXXFLAGS -Dchar16_t=uint16_t -Dchar32_t=uint32_t" \
 #   --with-extra-cflags="$CPPFLAGS" \
 bash ./configure \
+    --with-sysroot="$(xcrun --sdk iphoneos --show-sdk-path)" \
     --with-extra-cflags="$CFLAGS" \
     --with-extra-cxxflags="$CFLAGS" \
     --with-extra-ldflags="$LDFLAGS" \
     --enable-option-checking=fatal \
-    --openjdk-target=$TARGET_PHYS \
+--build=x86_64-apple-darwin \
+--host=aarch64-macos-ios \
+--target=aarch64-macos-ios \
     --with-jdk-variant=normal \
     --with-jvm-variants=$JVM_VARIANTS \
     --with-cups-include=$CUPS_DIR \
@@ -72,7 +78,7 @@ bash ./configure \
 error_code=$?
 if [ "$error_code" -ne 0 ]; then
   echo "\n\nCONFIGURE ERROR $error_code , config.log:"
-  cat config.log
+  #cat config.log
   exit $error_code
 fi
 

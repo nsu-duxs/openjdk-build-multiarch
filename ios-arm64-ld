@@ -1,2 +1,0 @@
-set -e
-$(xcrun -find -sdk iphoneos ld) -arch arm64 $@

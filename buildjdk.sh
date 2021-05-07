@@ -52,18 +52,15 @@ fi
 cd openjdk
 #rm -rf build
 
- #   --openjdk-target=$TARGET_PHYS \
 #   --with-extra-cxxflags="$CXXFLAGS -Dchar16_t=uint16_t -Dchar32_t=uint32_t" \
 #   --with-extra-cflags="$CPPFLAGS" \
+#   --with-sysroot="$(xcrun --sdk iphoneos --show-sdk-path)" \
 bash ./configure \
-    --with-sysroot="$(xcrun --sdk iphoneos --show-sdk-path)" \
+    --openjdk-target=$TARGET_PHYS \
     --with-extra-cflags="$CFLAGS" \
     --with-extra-cxxflags="$CFLAGS" \
     --with-extra-ldflags="$LDFLAGS" \
     --enable-option-checking=fatal \
---build=x86_64-apple-darwin \
---host=aarch64-macos-ios \
---target=aarch64-macos-ios \
     --with-jdk-variant=normal \
     --with-jvm-variants=$JVM_VARIANTS \
     --with-cups-include=$CUPS_DIR \

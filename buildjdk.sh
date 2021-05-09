@@ -39,7 +39,7 @@ if [ "$BUILD_IOS" != "1" ]; then
   ar cru dummy_libs/libthread_db.a
 else
   platform_args=--with-toolchain-type=clang
-  export CFLAGS+=" -Dfinite=isfinite"
+  export CFLAGS+=" -Dfinite(x)=isfinite(x)"
   export CHOST="aarch64-apple-darwin"
 fi
 

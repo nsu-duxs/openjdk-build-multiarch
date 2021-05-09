@@ -39,13 +39,7 @@ if [ "$BUILD_IOS" != "1" ]; then
   ar cru dummy_libs/libthread_db.a
 else
   platform_args=--with-toolchain-type=clang
-  # bothflags=" -arch arm64 -miphoneos-version-min=12.0"
-  # -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk
-  #export SDKROOT=$(xcrun --sdk iphoneos --show-sdk-path)
-  #export CFLAGS+=" -arch arm64 -miphoneos-version-min=12.0 -isysroot $(xcrun --sdk iphoneos --show-sdk-path) -v"
-
-  #export LDFLAGS+=" -arch arm64 -miphoneos-version-min=12.0 -isysroot $(xcrun --sdk iphoneos --show-sdk-path) -v"
-
+  export CFLAGS+=" -Dfinite=isfinite"
   export CHOST="aarch64-apple-darwin"
 fi
 

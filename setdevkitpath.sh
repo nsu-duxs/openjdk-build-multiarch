@@ -46,6 +46,8 @@ if [ "$BUILD_IOS" == "1" ]; then
   export CXX=$PWD/ios-arm64-clang++
   #$(xcrun -find -sdk iphoneos clang++)
   export LD=eyeswtf #$(xcrun -find -sdk iphoneos ld)
+
+  export HOTSPOT_DISABLE_DTRACE_PROBES=1
 else
 
 export JVM_PLATFORM=linux

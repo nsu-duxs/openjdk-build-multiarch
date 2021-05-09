@@ -1,4 +1,3 @@
 set -e
 args=${@/arm64/x86_64}
-echo $args > /Users/pojavlauncher/Documents/cccmd.txt
 /usr/bin/CC $args

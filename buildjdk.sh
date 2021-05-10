@@ -13,7 +13,7 @@ fi
 
 export FREETYPE_DIR=`pwd`/freetype-$BUILD_FREETYPE_VERSION/build_android-$TARGET_SHORT
 export CUPS_DIR=`pwd`/cups-2.2.4
-export CFLAGS+=" -DDONT_COMPILE_SHENANDOAH -DLE_STANDALONE" # -I$FREETYPE_DIR -I$CUPS_DIR
+export CFLAGS+=" -DLE_STANDALONE" # -I$FREETYPE_DIR -I$CUPS_DIR
 export LDFLAGS+=" -L`pwd`/dummy_libs"
 
 # if [ "$TARGET_JDK" == "aarch32" ] || [ "$TARGET_JDK" == "aarch64" ]

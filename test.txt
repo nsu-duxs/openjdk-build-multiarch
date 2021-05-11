@@ -1,2 +1,0 @@
-$genpath/genSocketOptionRegistry/genSocketOptionRegistry.o: \
-    $pwd/openjdk/jdk/make/src/native/genconstants/ch/genSocketOptionRegistry.c

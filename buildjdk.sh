@@ -39,19 +39,8 @@ if [ "$BUILD_IOS" != "1" ]; then
   ar cru dummy_libs/libthread_db.a
 else
   platform_args=--with-toolchain-type=clang
-  export CFLAGS+=" -I$PWD/ios-missing-include"
+  export CFLAGS+=" -I$PWD/ios-missing-include -Wno-implicit-function-declaration"
   export CHOST="aarch64-apple-darwin"
-
-  # workaround generate not working
-  genpath=openjdk/build/${JVM_PLATFORM}-${TARGET_JDK}-normal-${JVM_VARIANTS}-${JDK_DEBUG_LEVEL}/jdk/btnative
-  mkdir -p $genpath/genSocketOptionRegistry
-  mkdir -p $genpath/genUnixConstants
-  echo "${genpath}/genSocketOptionRegistry/genSocketOptionRegistry.o: \
-    ${PWD}/openjdk/jdk/make/src/native/genconstants/ch/genSocketOptionRegistry.c" \
-    > ${genpath}/genSocketOptionRegistry/genSocketOptionRegistry.d
-  echo "${genpath}/genUnixConstants/genUnixConstants.o: \
-    ${PWD}/openjdk/jdk/make/src/native/genconstants/fs/genUnixConstants.c"\
-    > ${genpath}/genUnixConstants/genUnixConstants.d
 fi
 
 cd openjdk

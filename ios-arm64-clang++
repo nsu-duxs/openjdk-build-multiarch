@@ -1,2 +1,3 @@
 set -e
-$thecxx -arch arm64 -isysroot $thesysroot -Dfinite\(x\)=isfinite\(x\) $@
+$thecxx -arch arm64 -isysroot $thesysroot $@
+# -Dfinite\(x\)=isfinite\(x\)

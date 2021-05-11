@@ -1,4 +1,3 @@
 set -e
-$thecc -arch arm64 -isysroot $thesysroot -Dfinite\(x\)=isfinite\(x\) $@
+$thecc -arch arm64 -isysroot $thesysroot $@
 # -Wl,-arch,arm64
-

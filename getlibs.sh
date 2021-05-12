@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # https://github.com/termux/termux-packages/blob/master/disabled-packages/openjdk-9-jre-headless/build.sh
 set -e
 

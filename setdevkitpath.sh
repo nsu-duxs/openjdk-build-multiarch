@@ -4,7 +4,7 @@ export NDK_VERSION=r10e
 
 if [ -z "$BUILD_FREETYPE_VERSION" ]
 then
-  export BUILD_FREETYPE_VERSION="2.10.0"
+  export BUILD_FREETYPE_VERSION="2.10.4"
 fi
 
 if [ -z "$JDK_DEBUG_LEVEL" ]
@@ -45,7 +45,7 @@ if [ "$BUILD_IOS" == "1" ]; then
   export CC=$PWD/ios-arm64-clang
   export CXX=$PWD/ios-arm64-clang++
   #$(xcrun -find -sdk iphoneos clang++)
-  export LD=eyeswtf #$(xcrun -find -sdk iphoneos ld)
+  export LD=$(xcrun -fnd -sdk iphoneos ld)
 
   export HOTSPOT_DISABLE_DTRACE_PROBES=1
 

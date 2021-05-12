@@ -13,3 +13,6 @@ freetype-2.10.0
 freetype-2.10.0.tar.bz2
 .DS_Store
 .idea
+ios-missing-include/cups
+ios-missing-include/X11
+ios-missing-include/Xm

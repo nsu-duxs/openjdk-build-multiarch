@@ -48,6 +48,8 @@ if [ "$BUILD_IOS" == "1" ]; then
   export LD=eyeswtf #$(xcrun -find -sdk iphoneos ld)
 
   export HOTSPOT_DISABLE_DTRACE_PROBES=1
+
+  export ANDROID_INCLUDE=$PWD/ios-missing-include
 else
 
 export JVM_PLATFORM=linux

@@ -28,8 +28,8 @@ export LDFLAGS+=" -L`pwd`/dummy_libs"
 # cp -R /usr/include/fontconfig $ANDROID_INCLUDE/
 
 if [ "$BUILD_IOS" != "1" ]; then
-  ln -s -f /usr/include/X11 $ANDROID_INCLUDE/
   ln -s -f /usr/include/fontconfig $ANDROID_INCLUDE/
+  x11dir=/usr/include/X11
 
   sudo apt -y install systemtap-sdt-dev gcc-multilib g++-multilib libxtst-dev libasound2-dev libelf-dev libfontconfig1-dev libx11-dev
 
@@ -39,9 +39,18 @@ if [ "$BUILD_IOS" != "1" ]; then
   ar cru dummy_libs/libthread_db.a
 else
   platform_args=--with-toolchain-type=clang
-  export CFLAGS+=" -I$PWD/ios-missing-include -Wno-implicit-function-declaration"
+  x11dir=/opt/X11/include/X11
+
+  export CFLAGS+=" -DHEADLESS -I$PWD/ios-missing-include -Wno-implicit-function-declaration"
   export CHOST="aarch64-apple-darwin"
+
+  brew install xquartz openmotif
 fi
+
+# fix building libjawt
+ln -s -f $CUPS_DIR/cups $ANDROID_INCLUDE/
+ln -s -f /usr/local/lib/Xm $ANDROID_INCLUDE/
+ln -s -f $x11dir $ANDROID_INCLUDE/
 
 cd openjdk
 #rm -rf build
@@ -63,7 +72,7 @@ bash ./configure \
     --with-fontconfig-include=$ANDROID_INCLUDE \
     --with-freetype-lib=$FREETYPE_DIR/lib \
     --with-freetype-include=$FREETYPE_DIR/include/freetype2 \
-    --x-includes=$ANDROID_INCLUDE $AUTOCONF_EXTRA_ARGS \
+    --with-x=$x11dir $AUTOCONF_EXTRA_ARGS \
     --x-libraries=/usr/lib \
         $platform_args || \
 error_code=$?

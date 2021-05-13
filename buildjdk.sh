@@ -45,9 +45,7 @@ else
   export CFLAGS+=" -DHEADLESS -I$PWD/ios-missing-include -Wno-implicit-function-declaration"
   export CHOST="aarch64-apple-darwin"
 
-  brew install xquartz openmotif
-  
-  ln -s -f /usr/local/lib/Xm $ANDROID_INCLUDE/
+  brew install xquartz
 fi
 
 # fix building libjawt

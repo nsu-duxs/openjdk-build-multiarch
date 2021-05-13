@@ -45,7 +45,7 @@ if [ "$BUILD_IOS" == "1" ]; then
   export CC=$PWD/ios-arm64-clang
   export CXX=$PWD/ios-arm64-clang++
   #$(xcrun -find -sdk iphoneos clang++)
-  export LD=$(xcrun -fnd -sdk iphoneos ld)
+  export LD=$(xcrun -find -sdk iphoneos ld)
 
   export HOTSPOT_DISABLE_DTRACE_PROBES=1
 

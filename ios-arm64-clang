@@ -4,7 +4,8 @@ set -e
 # What is this piece of loop?
 # It fixes -DSTUFF='{"stuff"}' where single bracket outside of value lost.
 index=0
-otherargs=
+shouldfix=0
+otherargs="-arch arm64 -isysroot $thesysroot "
 for i
 do
   # Maybe you won't understand this :)
@@ -13,9 +14,14 @@ do
 
   if [[ $i == -D*={*} ]]; then
     otherargs+="\"$i\" "
+    shouldfix=1
   else
     otherargs+="$i "
   fi
 done
 
-$(eval $thecc -arch arm64 -isysroot $thesysroot $otherargs)
+if [[ $shouldfix -eq 1 ]]; then
+  $(eval $thecc $otherargs)
+else
+  $thecc $otherargs
+fi

@@ -10,12 +10,12 @@ for i
 do
 
   if [[ $i == -D*={*} ]]; then
-    otherargs+="\"$i\" "
-    shouldfix=1
-  else
     # Maybe you won't understand this :)
     # As we are running on eval (to fix arguments), we need to escape brackets.
     i=${i//\"/\\\"}
+    otherargs+="\'$i\' "
+    shouldfix=1
+  else
     otherargs+="$i "
   fi
 done

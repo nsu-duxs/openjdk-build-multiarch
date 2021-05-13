@@ -43,7 +43,7 @@ else
   platform_args=--with-toolchain-type=clang
   AUTOCONF_x11arg="--with-x=/opt/X11/include/X11"
 
-  export CFLAGS+=" -DHEADLESS -I$PWD/ios-missing-include -Wno-implicit-function-declaration"
+  export CFLAGS+=" -arch arm64 -isysroot $thesysroot -DHEADLESS=1 -I$PWD/ios-missing-include -Wno-implicit-function-declaration"
   export CHOST="aarch64-apple-darwin"
 
   brew install xquartz

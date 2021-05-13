@@ -12,6 +12,7 @@ if [ "$BUILD_IOS" == "1" ]; then
     --host=$TARGET \
     --prefix=`pwd`/build_android-${TARGET_SHORT} \
     --without-zlib \
+    --with-brotli=no \
     --with-png=no \
     --with-harfbuzz=no \
     "CFLAGS=-arch arm64 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O2 -Wreturn-type -Wunused-variable -fmessage-length=0 -fvisibility=hidden -miphoneos-version-min=12.0 -I$thesysroot/usr/include/libxml2/ -isysroot $thesysroot" \
@@ -24,7 +25,6 @@ else
     --host=$TARGET \
     --prefix=`pwd`/build_android-${TARGET_SHORT} \
     --without-zlib \
-    --with-brotli=no \
     --with-png=no \
     --with-harfbuzz=no $EXTRA_ARGS \
     || error_code=$?

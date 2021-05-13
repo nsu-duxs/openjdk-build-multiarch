@@ -10,7 +10,7 @@ for i
 do
   # Maybe you won't understand this :)
   # As we are running on eval (to fix arguments), we need to escape brackets.
-  i=${i//\"/\\\"}
+  # i=${i//\"/\\\"}
 
   if [[ $i == -D*={*} ]]; then
     otherargs+="\"$i\" "

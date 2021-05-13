@@ -13,8 +13,7 @@ fi
 
 export FREETYPE_DIR=`pwd`/freetype-$BUILD_FREETYPE_VERSION/build_android-$TARGET_SHORT
 export CUPS_DIR=`pwd`/cups-2.2.4
-export CFLAGS+=" -DLE_STANDALONE" # -I$FREETYPE_DIR -I$CUPS_DIR
-export LDFLAGS+=" -L`pwd`/dummy_libs"
+export CFLAGS+=" -DLE_STANDALONE" # -I$FREETYPE_DIR -I$CUPS_DI
 
 # if [ "$TARGET_JDK" == "aarch32" ] || [ "$TARGET_JDK" == "aarch64" ]
 # then
@@ -32,6 +31,8 @@ if [ "$BUILD_IOS" != "1" ]; then
   ln -s -f /usr/include/fontconfig $ANDROID_INCLUDE/
   AUTOCONF_x11arg="--x-includes=$ANDROID_INCLUDE/X11"
 
+  export LDFLAGS+=" -L`pwd`/dummy_libs"
+
   sudo apt -y install systemtap-sdt-dev gcc-multilib g++-multilib libxtst-dev libasound2-dev libelf-dev libfontconfig1-dev libx11-dev
 
 # Create dummy libraries so we won't have to remove them in OpenJDK makefiles
@@ -43,7 +44,9 @@ else
   platform_args=--with-toolchain-type=clang
   AUTOCONF_x11arg="--with-x=/opt/X11/include/X11"
 
-  export CFLAGS+=" -arch arm64 -isysroot $thesysroot -DHEADLESS=1 -I$PWD/ios-missing-include -Wno-implicit-function-declaration"
+  sameflags="-arch arm64 -isysroot $thesysroot -DHEADLESS=1 -I$PWD/ios-missing-include -Wno-implicit-function-declaration"
+  export CFLAGS+=" $sameflags"
+  export CXXFLAGS="$sameflags"
   export CHOST="aarch64-apple-darwin"
 
   brew install xquartz

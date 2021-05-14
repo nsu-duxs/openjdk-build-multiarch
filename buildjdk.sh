@@ -47,8 +47,6 @@ else
   sameflags="-arch arm64 -isysroot $thesysroot -miphoneos-version-min=12.0 -DHEADLESS=1 -I$PWD/ios-missing-include -Wno-implicit-function-declaration"
   export CFLAGS+=" $sameflags"
   export CXXFLAGS="$sameflags"
-  export LDFLAGS="$sameflags"
-  export CHOST="aarch64-apple-darwin"
 
   brew install xquartz
 fi

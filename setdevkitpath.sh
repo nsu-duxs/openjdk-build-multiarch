@@ -42,8 +42,8 @@ if [ "$BUILD_IOS" == "1" ]; then
   export thesysroot=$(xcrun --sdk iphoneos --show-sdk-path)
 
   export thehostcxx=$PWD/macos-host-cc
-  export CC=$(xcrun -find -sdk iphoneos clang) # $PWD/ios-arm64-clang
-  export CXX=$(xcrun -find -sdk iphoneos clang++) # $PWD/ios-arm64-clang++
+  export CC=$PWD/ios-arm64-clang
+  export CXX=$PWD/ios-arm64-clang++
   export LD=$(xcrun -find -sdk iphoneos ld)
 
   export HOTSPOT_DISABLE_DTRACE_PROBES=1

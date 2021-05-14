@@ -4,6 +4,7 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build_android:
+    needs: build_ios
     strategy:
       matrix:
         arch: [ "aarch32", "aarch64", "x86", "x86_64" ]

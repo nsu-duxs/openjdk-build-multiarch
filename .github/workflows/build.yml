@@ -61,19 +61,19 @@ jobs:
     - name: Upload JDK build output
       uses: actions/upload-artifact@v2
       with:
-        name: "jdk8-ios-${{matrix.arch}}"
+        name: "jdk8-ios-aarch64"
         path: jdk8*.tar.xz
 
     - name: Upload JRE build output
       uses: actions/upload-artifact@v2
       with:
-        name: 'jre8-ios-${{matrix.arch}}'
+        name: 'jre8-ios-aarch64'
         path: jre8*.tar.xz
 
     - name: Upload JRE debuginfo build output
       uses: actions/upload-artifact@v2
       with:
-        name: "jre8-ios-debuginfo-${{matrix.arch}}"
+        name: "jre8-ios-debuginfo-aarch64"
         path: dizout
 
   pojav:

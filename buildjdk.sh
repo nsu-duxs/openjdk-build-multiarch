@@ -27,7 +27,7 @@ export CFLAGS+=" -DLE_STANDALONE" # -I$FREETYPE_DIR -I$CUPS_DI
 # cp -R /usr/include/fontconfig $ANDROID_INCLUDE/
 
 if [ "$BUILD_IOS" != "1" ]; then
-  export CFLAGS+=" -Oz"
+  export CFLAGS+=" -Os"
 
   ln -s -f /usr/include/X11 $ANDROID_INCLUDE/
   ln -s -f /usr/include/fontconfig $ANDROID_INCLUDE/
@@ -68,7 +68,7 @@ bash ./configure \
     --with-extra-ldflags="$LDFLAGS" \
     --enable-option-checking=fatal \
     --with-jdk-variant=normal \
-    --with-jvm-variants="${JVM_VARIANTS/AND/,}" \
+    --with-jvm-variants="core" \
     --with-cups-include=$CUPS_DIR \
     --with-devkit=$TOOLCHAIN \
     --with-debug-level=$JDK_DEBUG_LEVEL \

@@ -63,7 +63,7 @@ cd openjdk
 #   --with-sysroot="$(xcrun --sdk iphoneos --show-sdk-path)" \
 
 # Let's print what's available
-bash configure --help
+# bash configure --help
 
 bash ./configure \
     --openjdk-target=$TARGET_PHYS \

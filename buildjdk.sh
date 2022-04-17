@@ -73,7 +73,8 @@ bash ./configure \
     --enable-option-checking=fatal \
     --with-jdk-variant=normal \
     --with-jvm-variants="${JVM_VARIANTS/AND/,}" \
-    --with-jvm-features=-aot,-fprof \
+    --disable-aot \
+    --disable-fprof \
     --with-cups-include=$CUPS_DIR \
     --with-devkit=$TOOLCHAIN \
     --with-debug-level=$JDK_DEBUG_LEVEL \

@@ -19,7 +19,20 @@ mkdir -p "$out"
 makearch () { echo "Making $2..."; cd "$work"; tar xf $(find "$in" -name jre8-$2-*release.tar.xz) > /dev/null 2>&1; mv release "$work1"/; mv bin "$work1"/;  mkdir -p "$work1"/lib; mv lib/$1 "$work1"/lib/; mv lib/jexec "$work1"/lib/; tar cJf bin-$2.tar.xz -C "$work1" . > /dev/null 2>&1; mv bin-$2.tar.xz "$out"/; rm -rf "$work"/*; rm -rf "$work1"/*; }
 
 # this one's static
-makeuni () { echo "Making universal..."; cd "$work"; tar xf $(find "$in" -name jre8-arm64-*release.tar.xz) > /dev/null 2>&1; rm -rf bin; rm -rf lib/aarch64; rm lib/jexec; rm release; tar cJf universal.tar.xz * > /dev/null 2>&1; mv universal.tar.xz "$out"/; rm -rf "$work"/*; }
+makeuni () { 
+  echo "Making universal...";
+  cd "$work";
+  tar xf $(find "$in" -name jre8-arm64-*release.tar.xz) > /dev/null 2>&1; rm -rf bin;
+  rm -rf lib/aarch64;
+  rm lib/jexec;
+  rm release;
+  rm -rf lib/ext
+  rm -rf lib/jfr
+  rm lib/jfr.jar
+  tar cJf universal.tar.xz * > /dev/null 2>&1;
+  mv universal.tar.xz "$out"/;
+  rm -rf "$work"/*;
+}
 
 # now time to use them!
 makeuni

@@ -16,7 +16,7 @@ mkdir -p "$out"
 
 compress_jars(){
   find ./ -name '*.jar' -execdir pack200 {}.gz {} \;
-  find ./ -name '*.jar' -delete \;
+  find ./ -name '*.jar' -execdir rm {} \;
 }
 
 # here comes a not-so-complicated functions to easily make desired arch

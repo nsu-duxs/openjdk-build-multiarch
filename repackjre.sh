@@ -14,6 +14,10 @@ mkdir -p $work
 mkdir -p $work1
 mkdir -p "$out"
 
+compress_jars(){
+  find ./ -name '*.jar' -execdir pack200 {}.gz {} \;
+}
+
 # here comes a not-so-complicated functions to easily make desired arch
 ## Usage: makearch [jre_libs_dir_name] [name_in_tarball]
 makearch () { echo "Making $2..."; cd "$work"; tar xf $(find "$in" -name jre8-$2-*release.tar.xz) > /dev/null 2>&1; mv release "$work1"/; mv bin "$work1"/;  mkdir -p "$work1"/lib; mv lib/$1 "$work1"/lib/; mv lib/jexec "$work1"/lib/; tar cJf bin-$2.tar.xz -C "$work1" . > /dev/null 2>&1; mv bin-$2.tar.xz "$out"/; rm -rf "$work"/*; rm -rf "$work1"/*; }
@@ -29,10 +33,13 @@ makeuni () {
   rm -rf lib/ext
   rm -rf lib/jfr
   rm lib/jfr.jar
+  compress_jars
   tar cJf universal.tar.xz * > /dev/null 2>&1;
   mv universal.tar.xz "$out"/;
   rm -rf "$work"/*;
 }
+
+
 
 # now time to use them!
 makeuni

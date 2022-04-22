@@ -15,7 +15,7 @@ mkdir -p $work1
 mkdir -p "$out"
 
 compress_jars(){
-  find ./ -name '*.jar' -execdir pack200 -g -G -E9 {}.pack {} \;
+  find ./ -name '*.jar' -execdir pack200 -S-1 -g -G -E9 {}.pack {} \;
   find ./ -name '*.jar' -execdir rm {} \;
 }
 

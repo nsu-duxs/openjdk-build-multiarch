@@ -56,7 +56,7 @@ makeuni () {
   rm lib/jexec;
   rm release;
   
-  rm -rf lib/ext 
+  find . ! -name 'zipfs.jar' -type f -exec rm -f {} +
   rm -rf lib/jfr
   rm lib/jfr.jar
   rm man/man1/servertool.1

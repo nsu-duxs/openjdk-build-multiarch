@@ -22,8 +22,15 @@ makearch () {
   tar xf $(find "$in" -name jre17-$2-*release.tar.xz) > /dev/null 2>&1;
   mv bin "$work1"/;
   mkdir -p "$work1"/lib;
-  mv lib/$1 "$work1"/lib/;
+  
+  #mv lib/$1 "$work1"/lib/;
   mv lib/jexec "$work1"/lib/;
+  
+  # server contains the libjvm.so
+  mv lib/server "$work1"/lib/;
+  # All the other .so files are at the root of the lib folder
+  find ./ -name '*.so' -execdir mv {} "$work1"/lib/{} \;
+  
   tar cJf bin-$2.tar.xz -C "$work1" . > /dev/null 2>&1;
   mv bin-$2.tar.xz "$out"/;
   rm -rf "$work"/*;
@@ -35,9 +42,12 @@ makeuni () {
   echo "Making universal...";
   cd "$work";
   tar xf $(find "$in" -name jre17-arm64-*release.tar.xz) > /dev/null 2>&1;
+  
   rm -rf bin;
-  rm -rf lib/aarch64;
+  rm -rf lib/server;
   rm lib/jexec;
+  find ./ -name '*.so' -execdir rm {} \; # Remove arch specific shared objects
+  
   tar cJf universal.tar.xz * > /dev/null 2>&1;
   mv universal.tar.xz "$out"/;
   rm -rf "$work"/*;

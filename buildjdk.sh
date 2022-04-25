@@ -71,7 +71,7 @@ bash ./configure \
     --enable-headless-only=yes \
     --with-toolchain-type=gcc \
     --with-jvm-variants=$JVM_VARIANTS \
-    --with-jvm-features=-nmt,-jni-check,-dtrace,-serialgc,-parallelgc,-shenandoahgc,-jvmci,-jvmti \
+    --with-jvm-features=-nmt,-jni-check,-dtrace,-serialgc,-parallelgc,-shenandoahgc,-jvmci,-jvmti,-management \
     --with-cups-include=$CUPS_DIR \
     --with-devkit=$TOOLCHAIN \
     --with-debug-level=$JDK_DEBUG_LEVEL \

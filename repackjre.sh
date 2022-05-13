@@ -28,8 +28,11 @@ makearch () {
   
   # server contains the libjvm.so
   mv lib/server "$work1"/lib/;
+  
   # All the other .so files are at the root of the lib folder
   find ./ -name '*.so' -execdir mv {} "$work1"/lib/{} \;
+  
+  mv release "$work1"/release
   
   tar cJf bin-$2.tar.xz -C "$work1" . > /dev/null 2>&1;
   mv bin-$2.tar.xz "$out"/;
@@ -47,6 +50,7 @@ makeuni () {
   rm -rf lib/server;
   rm lib/jexec;
   find ./ -name '*.so' -execdir rm {} \; # Remove arch specific shared objects
+  rm release
   
   tar cJf universal.tar.xz * > /dev/null 2>&1;
   mv universal.tar.xz "$out"/;

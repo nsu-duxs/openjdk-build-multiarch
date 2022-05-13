@@ -33,7 +33,7 @@ jlink \
 --strip-debug \
 --no-man-pages \
 --no-header-files \
---release-info=jdkout/release
+--release-info=jdkout/release \
 --compress=0
 
 # mv jreout/lib/${TARGET_JDK}/libfontmanager.diz jreout/lib/${TARGET_JDK}/libfontmanager.diz.keep

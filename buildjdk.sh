@@ -13,12 +13,12 @@ fi
 
 export FREETYPE_DIR=$PWD/freetype-$BUILD_FREETYPE_VERSION/build_android-$TARGET_SHORT
 export CUPS_DIR=$PWD/cups-2.2.4
-export CFLAGS+=" -DLE_STANDALONE -fPIE -pie" # -I$FREETYPE_DIR -I$CUPS_DI
+export CFLAGS+=" -DLE_STANDALONE" # -I$FREETYPE_DIR -I$CUPS_DI
 
-# if [ "$TARGET_JDK" == "aarch32" ] || [ "$TARGET_JDK" == "aarch64" ]
-# then
-#   export CFLAGS+=" -march=armv7-a+neon"
-# fi
+if [ "$TARGET_JDK" == "aarch32" ] || [ "$TARGET_JDK" == "aarch64" ]
+then
+export CFLAGS+=" -fPIE"
+fi
 
 # It isn't good, but need make it build anyways
 # cp -R $CUPS_DIR/* $ANDROID_INCLUDE/

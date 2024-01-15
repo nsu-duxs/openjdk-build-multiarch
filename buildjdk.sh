@@ -41,8 +41,6 @@ if [ "$BUILD_IOS" != "1" ]; then
   export CFLAGS+=" -DANDROID"
   export LDFLAGS+=" -L$PWD/dummy_libs"
 
-  sudo apt -y install systemtap-sdt-dev libxtst-dev libasound2-dev libelf-dev libfontconfig1-dev libx11-dev libxext-dev libxrandr-dev libxrender-dev libxtst-dev libxt-dev
-
 # Create dummy libraries so we won't have to remove them in OpenJDK makefiles
   mkdir -p dummy_libs
   ar cru dummy_libs/libpthread.a

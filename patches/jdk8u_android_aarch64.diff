@@ -1,0 +1,33 @@
+diff --git a/hotspot/src/cpu/aarch64/vm/immediate_aarch64.cpp b/hotspot/src/cpu/aarch64/vm/immediate_aarch64.cpp
+index 9f606ff3..66719dc6 100644
+--- a/hotspot/src/cpu/aarch64/vm/immediate_aarch64.cpp
++++ b/hotspot/src/cpu/aarch64/vm/immediate_aarch64.cpp
+@@ -20,6 +20,7 @@
+  */
+ 
+ #include <stdlib.h>
++#include "utilities/globalDefinitions.hpp"
+ #include "immediate_aarch64.hpp"
+ 
+ // there are at most 2^13 possible logical immediate encodings
+@@ -122,8 +123,19 @@ static inline u_int32_t uimm(u_int32_t val, int hi, int lo)
+ 
+ u_int64_t replicate(u_int64_t bits, int nbits, int count)
+ {
++# ifdef ASSERT
++  assert(count > 0, "must be");
++  assert(nbits > 0, "must be");
++  assert(count * nbits <= 64, "must be");
++# endif
++
++  // Special case nbits == 64 since the shift below with that nbits value
++  // would result in undefined behavior.
++  if (nbits == 64) {
++    return bits;
++  }
++
+   u_int64_t result = 0;
+-  // nbits may be 64 in which case we want mask to be -1
+   u_int64_t mask = ones(nbits);
+   for (int i = 0; i < count ; i++) {
+     result <<= nbits;

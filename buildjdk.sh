@@ -109,6 +109,10 @@ bash ./configure \
     --with-debug-level=$JDK_DEBUG_LEVEL \
     --with-fontconfig-include=$ANDROID_INCLUDE \
     $AUTOCONF_x11arg $AUTOCONF_EXTRA_ARGS \
+    OBJCOPY=${OBJCOPY} \
+    RANLIB=${RANLIB} \
+    AR=${AR} \
+    STRIP=${STRIP} \
     --x-libraries=/usr/lib \
         $platform_args || \
 error_code=$?

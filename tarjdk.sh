@@ -7,6 +7,7 @@ if [[ "$BUILD_IOS" != "1" ]]; then
 unset AR AS CC CXX LD OBJCOPY RANLIB STRIP CPPFLAGS LDFLAGS
 git clone https://github.com/termux/termux-elf-cleaner || true
 cd termux-elf-cleaner
+# This is the last commit that uses autoconf, newer builds are using cmake
 git checkout eab198c72a020e883b79f99b70a5aa0243dbf0a8 
 autoreconf --install
 bash configure

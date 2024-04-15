@@ -61,10 +61,8 @@ export CPPFLAGS=""
 export LDFLAGS=""
 
 # Underlying compiler called by the wrappers
-# export thecc=$TOOLCHAIN/bin/$TARGET-gcc
-# export thecxx=$TOOLCHAIN/bin/$TARGET-g++
-export thecc=$TOOLCHAIN/bin/${NDK_PREBUILT_ARCH}-linux-android${API}-clang
-export thecxx=$TOOLCHAIN/bin/${NDK_PREBUILT_ARCH}-linux-android${API}-clang++
+export thecc=$TOOLCHAIN/bin/${TARGET}${API}-clang
+export thecxx=$TOOLCHAIN/bin/${TARGET}${API}-clang++
 
 # Configure and build.
 export AR=$TOOLCHAIN/bin/llvm-ar

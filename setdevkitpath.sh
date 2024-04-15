@@ -48,16 +48,23 @@ export JVM_PLATFORM=linux
 export API=21
 export NDK=$PWD/android-ndk-$NDK_VERSION
 export ANDROID_NDK_ROOT=$NDK
-export TOOLCHAIN=$NDK/generated-toolchains/android-${TARGET_SHORT}-toolchain
-# export TOOLCHAIN=$NDK/toolchains/llvm/prebuilt/linux-x86_64
+#export TOOLCHAIN=$NDK/generated-toolchains/android-${TARGET_SHORT}-toolchain
+export TOOLCHAIN=$NDK/toolchains/llvm/prebuilt/linux-x86_64
 
 export ANDROID_INCLUDE=$TOOLCHAIN/sysroot/usr/include
 
-export CPPFLAGS="-I$ANDROID_INCLUDE -I$ANDROID_INCLUDE/$TARGET" # -I/usr/include -I/usr/lib
-export LDFLAGS="-L$NDK/platforms/android-$API/arch-$TARGET_SHORT/usr/lib"
 
-export thecc=$TOOLCHAIN/bin/$TARGET-gcc
-export thecxx=$TOOLCHAIN/bin/$TARGET-g++
+# If I'm right it should only need the dummy libs
+export CPPFLAGS="-I$ANDROID_INCLUDE -I$ANDROID_INCLUDE/$TARGET" # -I/usr/include -I/usr/lib
+#export LDFLAGS="-L$NDK/platforms/android-$API/arch-$TARGET_SHORT/usr/lib"
+export CPPFLAGS=""
+export LDFLAGS=""
+
+# Underlying compiler called by the wrappers
+# export thecc=$TOOLCHAIN/bin/$TARGET-gcc
+# export thecxx=$TOOLCHAIN/bin/$TARGET-g++
+export thecc=$TOOLCHAIN/bin/${NDK_PREBUILT_ARCH}-linux-android${API}-clang
+export thecxx=$TOOLCHAIN/bin/${NDK_PREBUILT_ARCH}-linux-android${API}-clang++
 
 # Configure and build.
 export AR=$TOOLCHAIN/bin/llvm-ar

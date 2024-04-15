@@ -7,9 +7,10 @@ if [[ "$BUILD_IOS" != "1" ]]; then
 unset AR AS CC CXX LD OBJCOPY RANLIB STRIP CPPFLAGS LDFLAGS
 git clone https://github.com/termux/termux-elf-cleaner || true
 cd termux-elf-cleaner
+git checkout eab198c72a020e883b79f99b70a5aa0243dbf0a8 
 autoreconf --install
 bash configure
-make CFLAGS=-D__ANDROID_API__=24
+make CFLAGS=-D__ANDROID_API__=${API}
 cd ..
 
 findexec() { find $1 -type f -name "*" -not -name "*.o" -exec sh -c '
@@ -32,7 +33,7 @@ cp -rv jre_override/lib/* jreout/lib/ || true
 cd jreout
 
 # Strip in place all .so files thanks to the ndk
-find ./ -name '*.so' -execdir $NDK/toolchains/llvm/prebuilt/linux-x86_64/${NDK_PREBUILT_ARCH}-linux-android/bin/strip {} \;
+find ./ -name '*.so' -execdir ${TOOLCHAIN}/bin/llvm-strip {} \;
 
 tar cJf ../jre17-${TARGET_SHORT}-`date +%Y%m%d`-${JDK_DEBUG_LEVEL}.tar.xz .
 

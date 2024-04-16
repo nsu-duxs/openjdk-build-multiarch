@@ -44,19 +44,21 @@ if [[ "$BUILD_IOS" == "1" ]]; then
 else
 
 export JVM_PLATFORM=linux
-# Set NDK
 export API=21
-export NDK=$PWD/android-ndk-$NDK_VERSION
-export ANDROID_NDK_ROOT=$NDK
-#export TOOLCHAIN=$NDK/generated-toolchains/android-${TARGET_SHORT}-toolchain
-export TOOLCHAIN=$NDK/toolchains/llvm/prebuilt/linux-x86_64
+
+# Runners usually ship with a recent NDK already
+if [[ -z "$ANDROID_NDK_HOME" ]]
+then
+  export ANDROID_NDK_HOME=$PWD/android-ndk-$NDK_VERSION
+fi
+
+export TOOLCHAIN=$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64
 
 export ANDROID_INCLUDE=$TOOLCHAIN/sysroot/usr/include
 
 
 # If I'm right it should only need the dummy libs
 export CPPFLAGS="-I$ANDROID_INCLUDE -I$ANDROID_INCLUDE/$TARGET" # -I/usr/include -I/usr/lib
-#export LDFLAGS="-L$NDK/platforms/android-$API/arch-$TARGET_SHORT/usr/lib"
 export CPPFLAGS=""
 export LDFLAGS=""
 

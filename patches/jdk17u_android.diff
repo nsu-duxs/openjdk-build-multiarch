@@ -430,8 +430,8 @@ index ae0c73dcb..e2c9a21f7 100644
 +#endif
 +}
  
- static bool file_exists(const char* filename) {
-   struct stat statbuf;
+ // check if addr is inside libjvm.so
+ bool os::address_is_in_vm(address addr) {
 @@ -1517,6 +1531,30 @@ bool os::dll_address_to_library_name(address addr, char* buf,
    return false;
  }

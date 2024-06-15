@@ -7,8 +7,13 @@ then
   export TARGET_VERSION=21
 fi
 
+
 # Set custom java version as the defautl jdk depending on the target version
-update-java-alternatives -s java-1.${TARGET_VERSION}*
+# Local build with docker only
+if [[ -z "$CI" ]]
+then
+  update-java-alternatives -s java-1.${TARGET_VERSION}*
+fi
 
 if [[ -z "$BUILD_FREETYPE_VERSION" ]]
 then

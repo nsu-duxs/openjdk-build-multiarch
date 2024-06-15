@@ -24,6 +24,8 @@ RUN apt-get install -y \
     libxtst-dev \
     libxt-dev \
     wget \
+    gcc \
+    g++ \
     clang \
     git \
     file \
@@ -31,6 +33,7 @@ RUN apt-get install -y \
 
 # JDK 17
 RUN apt-get install -y openjdk-17-jdk
+RUN apt-get install -y openjdk-21-jdk
 
 WORKDIR /home
 
@@ -42,8 +45,6 @@ RUN \
     wget -nc -nv -O android-ndk-$NDK_VERSION-linux-x86_64.zip "https://dl.google.com/android/repository/android-ndk-$NDK_VERSION-linux.zip" \
     && unzip -q android-ndk-$NDK_VERSION-linux-x86_64.zip \
     && rm android-ndk-$NDK_VERSION-linux-x86_64.zip
-
-
 
 
 COPY . .

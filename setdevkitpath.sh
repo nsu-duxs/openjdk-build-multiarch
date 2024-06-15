@@ -1,6 +1,14 @@
-# Use the old NDK r10e to not get internal compile error at (still?)
-# https://github.com/PojavLauncherTeam/openjdk-multiarch-jdk8u/blob/aarch64-shenandoah-jdk8u272-b10/jdk/src/share/native/sun/java2d/loops/GraphicsPrimitiveMgr.c
+# Description: Set the environment variables for the build scripts.
 export NDK_VERSION=r25c
+
+# Target version is either 17 or 21
+if [[ -z "$TARGET_VERSION" ]]
+then
+  export TARGET_VERSION=21
+fi
+
+# Set custom java version as the defautl jdk depending on the target version
+update-java-alternatives -s java-1.${TARGET_VERSION}*
 
 if [[ -z "$BUILD_FREETYPE_VERSION" ]]
 then

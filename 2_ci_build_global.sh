@@ -21,8 +21,11 @@ fi
 
 # Some modifies to NDK to fix
 
-./3_getlibs.sh
-./4_buildlibs.sh
+# Only build the sources if they are not already present
+if [ ! -d "cups-2.2.4" ]; then
+  ./3_getlibs.sh
+  ./4_buildlibs.sh
+fi
 ./5_clonejdk.sh
 ./6_buildjdk.sh
 ./7_removejdkdebuginfo.sh

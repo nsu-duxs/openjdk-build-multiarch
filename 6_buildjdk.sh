@@ -75,14 +75,14 @@ fi
 # fix building libjawt
 ln -s -f $CUPS_DIR/cups $ANDROID_INCLUDE/
 
-cd openjdk
+cd openjdk-${TARGET_VERSION}
 
 # Apply patches
 git reset --hard
 if [[ "$BUILD_IOS" != "1" ]]; then
-  find ../patches/jre_17/android -name "*.diff" -print0 | xargs -0 -I {} sh -c 'echo "Applying {}" && git apply {} && || echo "git apply failed (Android patch set)"' 
+  find ../patches/jre_${TARGET_VERSION}/android -name "*.diff" -print0 | xargs -0 -I {} sh -c 'echo "Applying {}" && git apply  --reject --whitespace=fix {} || echo "git apply failed (Android patch set)"' 
 else
-  find ../patches/jre_17/ios -name "*.diff" -print0 | xargs -0 -I {} sh -c 'echo "Applying {}" && git apply {} && || echo "git apply failed (iOs patch set)"' 
+  find ../patches/jre_${TARGET_VERSION}/ios -name "*.diff" -print0 | xargs -0 -I {} sh -c 'echo "Applying {}" && git apply --reject --whitespace=fix {} && || echo "git apply failed (iOs patch set)"' 
 
   # Hack: exclude building macOS stuff
   desktop_mac=src/java.desktop/macosx

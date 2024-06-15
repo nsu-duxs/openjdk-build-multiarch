@@ -35,12 +35,19 @@ if [[ "$BUILD_IOS" != "1" ]]; then
   platform_args="--with-toolchain-type=gcc \
     --with-freetype-include=$FREETYPE_DIR/include/freetype2 \
     --with-freetype-lib=$FREETYPE_DIR/lib \
-    --build=x86_64-unknown-linux-gnu \
-    OBJCOPY=${OBJCOPY} \
+    "
+
+  if [[ $TARGET_VERSION -eq 21 ]]; then
+    platform_args+="--build=x86_64-unknown-linux-gnu \
+    "
+  fi
+
+  platform_args+="OBJCOPY=${OBJCOPY} \
     RANLIB=${RANLIB} \
     AR=${AR} \
     STRIP=${STRIP} \
     "
+
   AUTOCONF_x11arg="--x-includes=$ANDROID_INCLUDE/X11"
 
   export CFLAGS+=" -DANDROID"

@@ -128,7 +128,7 @@ jobs:
           path: pojav
 
       - name: Repack JRE
-        run: bash "9_repackjre.sh" $GITHUB_WORKSPACE/pojav $GITHUB_WORKSPACE/pojav/jre${{ matrix.version }}-pojav
+        run: export TARGET_VERSION=${{ matrix.version }} && bash "9_repackjre.sh" $GITHUB_WORKSPACE/pojav $GITHUB_WORKSPACE/pojav/jre${{ matrix.version }}-pojav
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

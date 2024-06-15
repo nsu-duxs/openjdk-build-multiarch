@@ -7,5 +7,5 @@ else
 fi
 export TARGET_JDK=aarch64
 
-bash ci_build_global.sh
+bash 2_ci_build_global.sh
 

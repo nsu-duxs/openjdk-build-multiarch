@@ -21,9 +21,9 @@ fi
 
 # Some modifies to NDK to fix
 
-./getlibs.sh
-./buildlibs.sh
-./clonejdk.sh
-./buildjdk.sh
-./removejdkdebuginfo.sh
-./tarjdk.sh
+./3_getlibs.sh
+./4_buildlibs.sh
+./5_clonejdk.sh
+./6_buildjdk.sh
+./7_removejdkdebuginfo.sh
+./8_tarjdk.sh

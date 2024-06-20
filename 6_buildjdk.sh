@@ -50,7 +50,7 @@ if [[ "$BUILD_IOS" != "1" ]]; then
 
   AUTOCONF_x11arg="--x-includes=$ANDROID_INCLUDE/X11"
 
-  export CFLAGS+=" -DANDROID"
+  export CFLAGS+=" -mllvm -polly -DANDROID"
   export LDFLAGS+=" -L$PWD/dummy_libs"
 
 # Create dummy libraries so we won't have to remove them in OpenJDK makefiles

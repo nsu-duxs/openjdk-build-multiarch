@@ -7,12 +7,13 @@ if [[ "$BUILD_IOS" != "1" ]]; then
 unset AR AS CC CXX LD OBJCOPY RANLIB STRIP CPPFLAGS LDFLAGS
 git clone https://github.com/termux/termux-elf-cleaner || true
 cd termux-elf-cleaner
-# This is the last commit that uses autoconf, newer builds are using cmake
-git checkout eab198c72a020e883b79f99b70a5aa0243dbf0a8 
-autoreconf --install
-bash configure
-make CFLAGS=-D__ANDROID_API__=${API}
-cd ..
+mkdir build
+cd build
+export CFLAGS=-D__ANDROID_API__=${API}
+cmake ..
+make -j4
+unset CFLAGS
+cd ../..
 
 findexec() { find $1 -type f -name "*" -not -name "*.o" -exec sh -c '
     case "$(head -n 1 "$1")" in
@@ -24,8 +25,8 @@ exit 1
 ' sh {} \; -print
 }
 
-findexec jreout | xargs -- ./termux-elf-cleaner/termux-elf-cleaner
-findexec jdkout | xargs -- ./termux-elf-cleaner/termux-elf-cleaner
+findexec jreout | xargs -- ./termux-elf-cleaner/build/termux-elf-cleaner
+findexec jdkout | xargs -- ./termux-elf-cleaner/build/termux-elf-cleaner
 
 fi
 

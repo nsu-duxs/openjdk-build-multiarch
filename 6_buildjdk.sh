@@ -50,8 +50,8 @@ if [[ "$BUILD_IOS" != "1" ]]; then
 
   AUTOCONF_x11arg="--x-includes=$ANDROID_INCLUDE/X11"
 
-  export CFLAGS+=" -mllvm -polly -DANDROID"
-  export LDFLAGS+=" -L$PWD/dummy_libs"
+  export CFLAGS+=" -mllvm -polly -DANDROID -Wno-error=implicit-function-declaration -Wno-error=int-conversion"
+  export LDFLAGS+=" -L$PWD/dummy_libs -Wl,--undefined-version"
 
 # Create dummy libraries so we won't have to remove them in OpenJDK makefiles
   mkdir -p dummy_libs
@@ -88,9 +88,9 @@ cd openjdk-${TARGET_VERSION}
 # Apply patches
 git reset --hard
 if [[ "$BUILD_IOS" != "1" ]]; then
-  find ../patches/jre_${TARGET_VERSION}/android -name "*.diff" -print0 | xargs -0 -I {} sh -c 'echo "Applying {}" && git apply  --reject --whitespace=fix {} || echo "git apply failed (Android patch set)"' 
+  find ../patches/jre_${TARGET_VERSION}/android -name "*.diff" -print0 | xargs -0 -I {} sh -c 'echo "Applying {}" && git apply  --reject --whitespace=fix {} || (echo "git apply failed (Android patch set)" && exit 1)' 
 else
-  find ../patches/jre_${TARGET_VERSION}/ios -name "*.diff" -print0 | xargs -0 -I {} sh -c 'echo "Applying {}" && git apply --reject --whitespace=fix {} || echo "git apply failed (iOs patch set)"' 
+  find ../patches/jre_${TARGET_VERSION}/ios -name "*.diff" -print0 | xargs -0 -I {} sh -c 'echo "Applying {}" && git apply --reject --whitespace=fix {} || (echo "git apply failed (iOs patch set)" && exit 1)' 
 
   # Hack: exclude building macOS stuff
   desktop_mac=src/java.desktop/macosx

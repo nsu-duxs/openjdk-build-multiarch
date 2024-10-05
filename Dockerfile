@@ -1,4 +1,4 @@
-FROM ubuntu:jammy
+FROM ubuntu:23.10
 
 RUN apt-get update
 
@@ -29,7 +29,9 @@ RUN apt-get install -y \
     clang \
     git \
     file \
-    make
+    make \
+    cmake \
+    xz-utils
 
 # JDK 17
 RUN apt-get install -y openjdk-17-jdk
@@ -39,7 +41,7 @@ WORKDIR /home
 
 
 # NDK install
-ENV NDK_VERSION r25c
+ENV NDK_VERSION r27b
 ENV ANDROID_NDK_HOME /home/android-ndk-$NDK_VERSION
 RUN \
     wget -nc -nv -O android-ndk-$NDK_VERSION-linux-x86_64.zip "https://dl.google.com/android/repository/android-ndk-$NDK_VERSION-linux.zip" \

@@ -1,4 +1,5 @@
 name: Build OpenJDK 8 for Android
+#nsu-duxs
 
 on:
   push:
